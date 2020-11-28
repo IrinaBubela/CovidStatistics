@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApidataService } from './apidata.service'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularAPICovid';
+
+  constructor(private data: ApidataService) {
+  }
 }

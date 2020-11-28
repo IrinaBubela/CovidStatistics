@@ -1,0 +1,41 @@
+<div>
+    <select class="form-control" [(ngModel)]="optionValue" (change)="filterEl(optionValue)">
+        <option>Europe</option>
+        <option>Asia</option>
+        <option>North-America</option>
+        <option>South-America</option>
+        <option>Africa</option>
+        <option>Oceania</option>
+    </select>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <p>All countries</p>
+                </th>
+                <th>
+                    <button class="btn btn-info" (click)="sortType('population')">Population </button>
+                </th>
+                <th>
+                    <button class="btn btn-info" (click)="sortType('deaths')">Deaths</button>
+                </th>
+                <th>
+                    <button class="btn btn-info" (click)="sortType('cases')">Cases</button>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let country of selectedCountries">
+                <td>{{country.country}}</td>
+                <td>{{country.population}}</td>
+                <td>{{country.deaths.total}}</td>
+                <td>{{country.cases.total}}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
