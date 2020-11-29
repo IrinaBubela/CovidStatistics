@@ -4,9 +4,7 @@ svg{
 
 .container-map{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-
+    width: 100vw;
 }
 
 app-map{
@@ -21,14 +19,57 @@ min-width: 100%;
 }
 
 .map{
-    min-width: 100vw;
+    min-width: 50vw;
     height: 550px;
+    margin-top: 3em;
 }
 .continent{
     width: 200px;
-    height: 200px; 
+    height: 200px;
+    cursor: pointer;
     fill:gray;
-    :hover{
+    &:hover{
         fill: rgb(130, 175, 218);
     }
+    text{
+        :hover{
+            fill: white !important;
+        }
+    }
 }
+
+.active {
+    fill: rgb(130, 175, 218);
+}
+
+.unactive{
+    fill:gray;
+}
+.btn-info{
+    background-color: rgb(130, 175, 218);
+    border: rgb(130, 175, 218) solid 1px;
+}
+
+
+.table{ 
+    tr{
+        td{
+            width: 180px !important;
+            &:first-child{
+                width: 200px !important;
+            }
+        }
+        th{
+            width: 180px !important;
+            &:first-child{
+                width: 200px !important;
+            }
+        }
+    }
+}
+th{
+    
+    > p{
+        margin-bottom: 0 ;
+    }
+} 

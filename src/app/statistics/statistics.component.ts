@@ -10,8 +10,10 @@ import { Country } from '../Country';
 
 export class StatisticsComponent implements OnInit {
   optionValue = '';
+  selectedCountry = '';
   countries: Country[] = [];
   selectedCountries: Country[] = [];
+  status = false;
 
   constructor(private apidataService: ApidataService) {
 
@@ -19,26 +21,23 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+    this.selectedCountry = 'Europe';
   }
 
   getData(): void {
     this.apidataService.getData()
       .subscribe((data: any) => {
         this.countries = data.response;
-        console.log(data.response);
+        return this.selectedCountries = this.countries.filter(country => {
+          return country.continent === 'Europe';
+        });
       });
-    this.selectedCountries = this.countries;
   }
 
   filterEl(option: string): any[] {
-    console.log(option);
+    this.selectedCountry = option;
 
     return this.selectedCountries = this.countries.filter(country => {
-      if (country.continent === option) {
-        console.log('yaa');
-
-      }
-
       return country.continent === option;
     });
   }
@@ -62,11 +61,11 @@ export class StatisticsComponent implements OnInit {
   }
 
   sortByDeaths(c1: Country, c2: Country): number {
-    return c1.deaths.total - c2.deaths.total;
+    return c2.deaths.total - c1.deaths.total;
   }
 
   sortByCases(c1: Country, c2: Country): number {
-    return c1.cases.total - c2.cases.total;
+    return c2.cases.total - c1.cases.total;
   }
 
 }
