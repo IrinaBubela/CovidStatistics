@@ -8,12 +8,14 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatisticsComponent,
-    FilterComponent
+    FilterComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,14 @@ export class StatisticsComponent implements OnInit {
   }
 
   filterEl(option: string): any[] {
+    console.log(option);
+
     return this.selectedCountries = this.countries.filter(country => {
+      if (country.continent === option) {
+        console.log('yaa');
+
+      }
+
       return country.continent === option;
     });
   }
