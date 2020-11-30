@@ -36,7 +36,6 @@ export class StatisticsComponent implements OnInit {
 
   filterEl(option: string): any[] {
     this.selectedCountry = option;
-
     return this.selectedCountries = this.countries.filter(country => {
       return country.continent === option;
     });

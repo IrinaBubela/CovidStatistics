@@ -1,28 +1,23 @@
-svg{
-    min-height: 100vh; 
-}
-
 .container-map{
     display: flex;
-    width: 100vw;
+    width: 99%;
+    .map{
+        margin-top: 3em;
+        .main-svg{
+            min-width: 100%;
+        }
+        svg{
+            min-height: 400px; 
+        }
+    }
+    .active {
+        fill: rgb(130, 175, 218);
+    }
+    .unactive{
+        fill:gray;
+    }
 }
 
-app-map{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-svg{
-min-width: 100%;
-}
-
-.map{
-    min-width: 50vw;
-    height: 550px;
-    margin-top: 3em;
-}
 .continent{
     width: 200px;
     height: 200px;
@@ -38,38 +33,56 @@ min-width: 100%;
     }
 }
 
-.active {
-    fill: rgb(130, 175, 218);
-}
-
-.unactive{
-    fill:gray;
-}
-.btn-info{
-    background-color: rgb(130, 175, 218);
-    border: rgb(130, 175, 218) solid 1px;
-}
-
-
-.table{ 
-    tr{
-        td{
-            width: 180px !important;
-            &:first-child{
-                width: 200px !important;
+.map-info{
+    .scrollit {
+        overflow-y:scroll;
+        height:80vh;
+        .table{ 
+            font-size: 15px;
+            .btn-info{
+                background-color: rgb(130, 175, 218);
+                border: rgb(130, 175, 218) solid 1px;
             }
-        }
-        th{
-            width: 180px !important;
-            &:first-child{
-                width: 200px !important;
+            tr{
+                th, td{
+                    min-width: 80px;
+                    max-width: 80px;
+                    &:first-child{
+                        min-width: 100px !important;
+                        max-width: 100px !important;
+                    }
+                }
+                th{
+            
+                    > p{
+                        margin-bottom: 0 ;
+                    }
+                } 
             }
+            
         }
+    }    
+}
+
+@media(max-width: 1201px){
+    .container-map{
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       .map{
+            margin-top: 0;
+            max-width: 700px;
+            svg{
+                min-height: 400px; 
+            }
+       }
     }
-}
-th{
+
+    .map-info{
+        width: 80vw;
+        .scrollit {
+            height:100vh;
+        }    
+    }
     
-    > p{
-        margin-bottom: 0 ;
-    }
-} 
+}
