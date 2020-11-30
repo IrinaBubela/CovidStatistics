@@ -9,15 +9,14 @@ import { Country } from '../Country';
 })
 
 export class StatisticsComponent implements OnInit {
-  optionValue = '';
   selectedCountry = '';
   countries: Country[] = [];
+  countriesWichHaveNameOfContinent = ['Europe', 'Asia', 'Oceania', 'Africa', 'North-America', 'South-America'];
   selectedCountries: Country[] = [];
-  status = false;
+  sortVarType = '';
+  sortReverse = false;
 
-  constructor(private apidataService: ApidataService) {
-
-  }
+  constructor(private apidataService: ApidataService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -28,43 +27,41 @@ export class StatisticsComponent implements OnInit {
     this.apidataService.getData()
       .subscribe((data: any) => {
         this.countries = data.response;
-        return this.selectedCountries = this.countries.filter(country => {
-          return country.continent === 'Europe';
-        });
+        return this.filteredArray('Europe');
       });
   }
 
   filterEl(option: string): any[] {
     this.selectedCountry = option;
+    return this.filteredArray(option);
+  }
+
+  filteredArray(continent: any): any[] {
     return this.selectedCountries = this.countries.filter(country => {
-      return country.continent === option;
+      return country.continent === continent && !this.countriesWichHaveNameOfContinent.includes(country.country);
     });
   }
 
-
   sortType(sort: string): void {
-    if (sort === 'population') {
-      this.selectedCountries = this.selectedCountries.sort(this.sortByPopulation);
+    this.sortVarType = sort;
+    this.sortReverse = !this.sortReverse;
+    this.selectedCountries.sort(this.dynamicSort(sort));
+  }
+
+  dynamicSort(property: any): any {
+    let sortOrder = -1;
+    if (this.sortReverse) {
+      sortOrder = 1;
     }
-    else if (sort === 'deaths') {
-      this.selectedCountries = this.selectedCountries.sort(this.sortByDeaths);
-    }
 
-    else if (sort === 'cases') {
-      this.selectedCountries = this.selectedCountries.sort(this.sortByCases);
-    }
+    return (a: any, b: any): any => {
+      let result;
+      if (property === 'deaths' || property === 'cases') {
+        result = a[property].total < b[property].total ? 1 : a[property].total > b[property].total ? -1 : 0;
+      } else {
+        result = a[property] < b[property] ? 1 : a[property] > b[property] ? -1 : 0;
+      }
+      return result * sortOrder;
+    };
   }
-
-  sortByPopulation(c1: Country, c2: Country): number {
-    return c2.population - c1.population;
-  }
-
-  sortByDeaths(c1: Country, c2: Country): number {
-    return c2.deaths.total - c1.deaths.total;
-  }
-
-  sortByCases(c1: Country, c2: Country): number {
-    return c2.cases.total - c1.cases.total;
-  }
-
 }

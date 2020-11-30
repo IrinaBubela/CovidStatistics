@@ -4,8 +4,6 @@
             <svg (click)="filterEl('North-America');" class="continent" x="0px" y="10px"
                 [ngClass]="selectedCountry==='North-America' ? 'active' : 'unactive'" width="220px" height="220px"
                 version="1.1" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
-
-                <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
                 <g>
                     <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
                         <path
@@ -200,23 +198,36 @@
                             <p>All countries</p>
                         </th>
                         <th>
-                            <button class="btn btn-info" (click)="sortType('population')">Population </button>
+                            <button class="btn btn-info" (click)="sortType('population')">
+                                Population
+                                <span *ngIf="sortVarType == 'population' && !sortReverse" class="fa fa-caret-up"></span>
+                                <span *ngIf="sortVarType == 'population' && sortReverse"
+                                    class="fa fa-caret-down"></span>
+                            </button>
                         </th>
                         <th>
-                            <button class="btn btn-info" (click)="sortType('deaths')">Deaths</button>
+                            <button class="btn btn-info" (click)="sortType('deaths')">
+                                Deaths
+                                <span *ngIf="sortVarType == 'deaths' && !sortReverse" class="fa fa-caret-up"></span>
+                                <span *ngIf="sortVarType == 'deaths' && sortReverse" class="fa fa-caret-down"></span>
+                            </button>
                         </th>
                         <th>
-                            <button class="btn btn-info" (click)="sortType('cases')">Cases</button>
+                            <button class="btn btn-info" (click)="sortType('cases')">
+                                Cases
+                                <span *ngIf="sortVarType == 'cases' && !sortReverse" class="fa fa-caret-up"></span>
+                                <span *ngIf="sortVarType == 'cases' && sortReverse" class="fa fa-caret-down"></span>
+                            </button>
                         </th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let country of selectedCountries">
-                        <td>{{country.country}}</td>
-                        <td>{{country.population}}</td>
-                        <td>{{country.deaths.total}}</td>
-                        <td>{{country.cases.total}}</td>
+                        <td>{{country.country == null ? 'Missing Data': country.country}}</td>
+                        <td>{{country.population == null ? 'Missing Data': country.population}}</td>
+                        <td>{{country.deaths.total == null ? 'Missing Data': country.deaths.total }}</td>
+                        <td>{{country.cases.total == null ? 'Missing Data': country.cases.total}}</td>
                     </tr>
                 </tbody>
             </table>

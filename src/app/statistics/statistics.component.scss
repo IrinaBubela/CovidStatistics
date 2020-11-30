@@ -47,6 +47,14 @@
                 th, td{
                     min-width: 80px;
                     max-width: 80px;
+                    button{
+                        padding: 5px 7px;
+                        .fa{
+                            margin-left: 4px;
+                        }
+                        display: flex;
+                        align-items: center;
+                    }
                     &:first-child{
                         min-width: 100px !important;
                         max-width: 100px !important;
