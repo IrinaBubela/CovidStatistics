@@ -8,12 +8,14 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TotalCasesComponent } from './total-cases/total-cases.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     StatisticsComponent,
+    TotalCasesComponent
   ],
   imports: [
     BrowserModule,

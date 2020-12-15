@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApidataService } from '../apidata.service';
 import { Country } from '../Country';
+import { HostListener } from "@angular/core"
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
+
+
 
 export class StatisticsComponent implements OnInit {
   selectedCountry = '';
@@ -15,21 +18,58 @@ export class StatisticsComponent implements OnInit {
   selectedCountries: Country[] = [];
   sortVarType = '';
   sortReverse = false;
+  mobile = false;
+  optionValue = "";
+  screenWidth: any;
 
   constructor(private apidataService: ApidataService) { }
 
   ngOnInit(): void {
-    this.getData();
+    this.getDataCountries();
     this.selectedCountry = 'Europe';
+    this.optionValue = 'Europe';
+    this.onResize();
+    this.showHideSelect();
   }
 
-  getData(): void {
-    this.apidataService.getData()
+
+  // Resizing show or hide select and map
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenWidth = window.innerWidth;
+  }
+
+  showHideSelect() {
+    if (this.screenWidth <= 990) {
+      this.mobile = true;
+
+    } else if (this.screenWidth >= 990) {
+      this.mobile = false;
+    }
+  }
+
+  onResizeWidth() {
+    this.showHideSelect()
+  }
+
+  selectValue(option: string) {
+    return this.selectedCountries = this.countries.filter(country => {
+      return country.continent === option;
+    });
+  }
+
+
+  // Get Data From API
+  getDataCountries(): void {
+    this.apidataService.getDataCountries()
       .subscribe((data: any) => {
         this.countries = data.response;
+        console.log(data);
         return this.filteredArray('Europe');
       });
   }
+
+
 
   filterEl(option: string): any[] {
     this.selectedCountry = option;

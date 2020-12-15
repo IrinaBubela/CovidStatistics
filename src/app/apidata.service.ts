@@ -11,7 +11,7 @@ export class ApidataService {
   constructor(public http: HttpClient) { }
 
 
-  getData(): Observable<Country[]> {
+  getDataCountries(): Observable<Country[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-rapidapi-key': '6af220483dmshe35ac42f40b703fp185d4cjsnfb32c02a5481'
@@ -19,6 +19,18 @@ export class ApidataService {
     };
 
     const url = 'https://covid-193.p.rapidapi.com/statistics';
+    return this.http.get<Country[]>(url, httpOptions);
+  }
+
+
+  getDataTotal(): Observable<Country[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-rapidapi-key': '6af220483dmshe35ac42f40b703fp185d4cjsnfb32c02a5481'
+      })
+    };
+
+    const url = 'https://covid-19-statistics.p.rapidapi.com/reports/total';
     return this.http.get<Country[]>(url, httpOptions);
   }
 }
