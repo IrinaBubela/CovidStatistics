@@ -1,5 +1,5 @@
-<div class="container-map">
-    <div class="map col-xl-7 col-md-12">
+<div class="container-map container" (window:resize)="onResizeWidth()">
+    <div *ngIf="!mobile" class="map col-xl-7 col-md-12">
         <svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <svg (click)="filterEl('North-America');" class="continent" x="0px" y="10px"
                 [ngClass]="selectedCountry==='North-America' ? 'active' : 'unactive'" width="220px" height="220px"
@@ -188,6 +188,17 @@
                 <text x="220px" y="490px" font-size="5rem" fill="white">Oceania</text>
             </svg>
         </svg>
+    </div>
+    <div class="col-md-12 px-0 select-option" *ngIf="mobile">
+        <p>Select continent you want to check</p>
+        <select class="form-control" [(ngModel)]="optionValue" (change)="selectValue(optionValue)">
+            <option>Europe</option>
+            <option>Asia</option>
+            <option>North-America</option>
+            <option>South-America</option>
+            <option>Africa</option>
+            <option>Oceania</option>
+        </select>
     </div>
     <div class="map-info col-xl-5 col-md-12 px-0">
         <div class="scrollit">

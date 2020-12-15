@@ -11,10 +11,10 @@
         }
     }
     .active {
-        fill: rgb(130, 175, 218);
+        fill: rgb(206, 89, 132);
     }
     .unactive{
-        fill:gray;
+        fill:#a9adb1 ;
     }
 }
 
@@ -72,6 +72,12 @@
     }    
 }
 
+.select-option{
+    margin-bottom: 3em;
+    margin-top: 1em;
+    text-transform: uppercase;
+}
+
 @media(max-width: 1201px){
     .container-map{
        flex-direction: column;
@@ -87,10 +93,26 @@
     }
 
     .map-info{
-        width: 80vw;
         .scrollit {
             height:100vh;
         }    
+    }
+    
+}
+
+
+
+@media(max-width: 470px){
+    .container-map{
+        padding: 0;
+     }
+
+    .map-info{
+        tr > th{
+            .btn{
+            font-size: 12px
+            }
+        }  
     }
     
 }
